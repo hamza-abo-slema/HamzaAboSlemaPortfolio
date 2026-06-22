@@ -601,6 +601,12 @@
       });
     });
 
+    // ===== Set video button overlay text from data-title =====
+    document.querySelectorAll('[data-title]').forEach(function(el) {
+      var span = el.querySelector('.video-overlay span');
+      if (span) span.textContent = 'تشغيل ' + el.getAttribute('data-title');
+    });
+
     // ===== Click-to-embed YouTube with Full Accessibility =====
     document.addEventListener('click', function(e) {
       var btn = e.target.closest('[data-embed]');
@@ -615,8 +621,9 @@
       var prev = document.querySelector('[data-embed] iframe');
       if (prev) {
         var p = prev.parentNode;
-        p.innerHTML = '<div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>شاهد</span></div>';
+        p.innerHTML = '<div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span></span></div>';
         var t = p.getAttribute('data-title');
+        p.querySelector('.video-overlay span').textContent = t ? 'تشغيل ' + t : 'تشغيل';
         p.setAttribute('aria-label', t ? 'تشغيل مقطع: ' + t : 'تشغيل مقطع فيديو');
       }
 
