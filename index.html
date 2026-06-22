@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>حمزة أبو سليمة - مهندس صوت</title>
+  <meta name="description" content="حمزة أبو سليمة - مهندس صوت، مونتير صوتي، وممثل إذاعي بخبرة 13 عاماً" />
+  <meta name="theme-color" content="#121212" />
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
+    body {
+      font-family: 'Traditional Arabic', 'Arial', 'Helvetica', sans-serif;
+      background-color: #121212;
+      background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('انا في داخل الاستديو.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #e5e5e5;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, iframe { max-width: 100%; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #1a1a1a; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+    /* ===== Utility Classes ===== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .container-narrow { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+    .gradient-text {
+      background: linear-gradient(135deg, #00bcd4, #4dd0e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glass {
+      background: rgba(26,26,26,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .section-title span { color: #00bcd4; }
+    .section-divider {
+      width: 80px;
+      height: 4px;
+      background: #00bcd4;
+      border-radius: 2px;
+      margin: 0 auto 60px;
+    }
+    .section-padding { padding: 100px 0; }
+    .btn-accent {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 36px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #00bcd4, #0097a7);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(0,188,212,0.3);
+    }
+    .btn-accent:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 50px rgba(0,188,212,0.5);
+    }
+    .btn-accent:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0,188,212,0.6), 0 0 30px rgba(0,188,212,0.3);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-section { opacity: 0; transform: translateY(40px); transition: all 0.7s ease-out; }
+    }
+    .fade-section.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      padding: 0 20px;
+    }
+    .navbar.scrolled { background: rgba(26,26,26,0.92); backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+    .navbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+    .logo { font-size: 1.4rem; font-weight: 900; }
+    .logo span:first-child { background: linear-gradient(135deg, #00bcd4, #4dd0e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .logo span:last-child { color: #888; }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-links a {
+      padding: 8px 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #aaa;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover, .nav-links a:focus { color: #00bcd4; background: rgba(255,255,255,0.05); }
+    .menu-btn {
+      display: none;
+      width: 40px; height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px;
+    }
+    .menu-btn span {
+      display: block;
+      width: 24px; height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .menu-btn.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-btn.open span:nth-child(2) { opacity: 0; }
+    .menu-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .mobile-menu.open { max-height: 300px; }
+    .mobile-menu a {
+      display: block;
+      padding: 14px 20px;
+      color: #ccc;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .mobile-menu a:hover, .mobile-menu a:focus { color: #00bcd4; background: rgba(255,255,255,0.05); }
+
+    /* ===== Hero ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: rgba(0,188,212,0.04);
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; padding: 100px 20px; }
+    .hero-bismillah { color: #00bcd4; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; letter-spacing: 2px; }
+    .hero-name { font-size: 3.5rem; font-weight: 900; margin-bottom: 16px; line-height: 1.2; }
+    .hero-sub { color: #888; font-size: 1.1rem; max-width: 600px; margin: 0 auto 40px; }
+    @media (max-width: 768px) {
+      .hero-sub { margin-bottom: 30px; }
+    }
+
+    /* ===== About ===== */
+    .about { background: #121212; }
+    .about-text p {
+      color: #ccc;
+      line-height: 1.9;
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+      text-align: justify;
+    }
+    /* ===== Portfolio ===== */
+    .portfolio { background: #121212; }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .tab-btn {
+      padding: 10px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 50px;
+      border: 1px solid #444;
+      background: transparent;
+      color: #888;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .tab-btn:hover { color: #ddd; border-color: #666; }
+    .tab-btn.active {
+      background: rgba(0,188,212,0.15);
+      border-color: #00bcd4;
+      color: #00bcd4;
+      box-shadow: 0 0 20px rgba(0,188,212,0.1);
+    }
+    .tab-btn:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0,188,212,0.4);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .video-card {
+      background: rgba(26,26,26,0.85);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .video-card:hover { border-color: rgba(0,188,212,0.3); transform: translateY(-2px); }
+    .video-card:focus-within { box-shadow: 0 0 0 3px rgba(0,188,212,0.4); }
+    .video-link {
+      display: block;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #111;
+      overflow: hidden;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+      text-align: inherit;
+    }
+    .video-link img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .video-card:hover .video-link img { transform: scale(1.05); }
+    .video-play {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px; height: 56px;
+      background: rgba(0,0,0,0.7);
+      border: 3px solid rgba(255,255,255,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .video-play svg {
+      width: 24px; height: 24px;
+      fill: #fff;
+      margin-right: 2px;
+    }
+    .video-card:hover .video-play {
+      background: rgba(0,188,212,0.9);
+      border-color: #fff;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    .video-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 40px 16px 12px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      z-index: 1;
+      pointer-events: none;
+    }
+    .video-overlay span { color: #fff; font-size: 0.8rem; font-weight: 600; }
+    .video-yt-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #aaa;
+      background: rgba(0,0,0,0.3);
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .video-yt-link:hover { color: #00bcd4; background: rgba(0,188,212,0.08); }
+    .video-yt-link svg { width: 16px; height: 16px; fill: currentColor; }
+    .video-yt-link:focus { outline: none; box-shadow: inset 0 0 0 2px #00bcd4; }
+
+    /* ===== Contact ===== */
+    .contact { background: #121212; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .contact-card {
+      background: rgba(26,26,26,0.85);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .contact-card:hover { border-color: rgba(0,188,212,0.3); }
+    .contact-card:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0,188,212,0.4);
+    }
+    .contact-icon {
+      width: 56px; height: 56px;
+      background: rgba(0,188,212,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      transition: background 0.3s;
+    }
+    .contact-card:hover .contact-icon { background: rgba(0,188,212,0.2); }
+    .contact-icon svg { width: 28px; height: 28px; color: #00bcd4; }
+    .contact-card h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .contact-card p { color: #00bcd4; font-size: 0.95rem; word-break: break-all; }
+
+    /* ===== Footer ===== */
+    footer {
+      border-top: 1px solid #222;
+      padding: 24px 20px;
+      text-align: center;
+      color: #555;
+      font-size: 0.85rem;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .video-grid { grid-template-columns: repeat(3, 1fr); }
+      .hero-name { font-size: 2.8rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .menu-btn { display: flex; }
+      .hero-name { font-size: 2.2rem; }
+      .hero-tags span { font-size: 0.85rem; padding: 5px 14px; }
+      .section-title { font-size: 1.6rem; }
+      .section-padding { padding: 60px 0; }
+      .video-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .about-text p { font-size: 0.95rem; }
+    }
+    @media (max-width: 480px) {
+      .hero-name { font-size: 1.8rem; }
+      .btn-accent { padding: 14px 24px; font-size: 1rem; }
+      .video-grid { grid-template-columns: 1fr; }
+      .stat-card { padding: 16px 12px; }
+      .stat-number { font-size: 1.5rem; }
+      .tab-btn { font-size: 0.85rem; padding: 8px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="القائمة الرئيسية">
+    <div class="navbar-inner">
+      <a href="#hero" class="logo" aria-label="الصفحة الرئيسية">
+        <span>Hamza</span><span>.</span>
+      </a>
+      <div class="nav-links" role="menubar">
+        <a href="#hero" role="menuitem">الرئيسية</a>
+        <a href="#about" role="menuitem">نبذة عني</a>
+        <a href="#portfolio" role="menuitem">أعمالي</a>
+        <a href="#contact" role="menuitem">تواصل</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="فتح القائمة">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" role="menu" aria-label="القائمة المتنقلة">
+      <a href="#hero" role="menuitem">الرئيسية</a>
+      <a href="#about" role="menuitem">نبذة عني</a>
+      <a href="#portfolio" role="menuitem">أعمالي</a>
+      <a href="#contact" role="menuitem">تواصل</a>
+    </div>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="hero" aria-label="القسم الرئيسي">
+    <div class="hero-content fade-section visible">
+      <p class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <h1 class="hero-name"><span class="gradient-text">حمزة</span> أبو سليمة</h1>
+      <p class="hero-sub">مهندس صوت محترف | خبرة 13 عاماً في التمثيل الإذاعي، المونتاج، والهندسة الصوتية</p>
+      <a href="https://t.me/Hamza_abo_slema" target="_blank" rel="noopener noreferrer" class="btn-accent" aria-label="تواصل معي عبر تيليجرام - الرابط يفتح في نافذة جديدة">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.127.037.358.02.557-.14 1.478-.78 5.07-1.102 6.726-.137.702-.406 1.184-.652 1.302-.557.268-1.177-.177-1.823-.35-.448-.12-2.062-.718-2.676-1.21-.306-.246-.65-.652-.024-1.084.188-.13 1.878-1.76 3.043-2.847.383-.358.143-.565-.272-.36-.145.071-2.129 1.454-3.193 2.146-.304.198-.822.245-1.044.155-.44-.18-1.102-.406-1.558-.66-.32-.18-.38-.498-.046-.756.98-.755 2.499-1.761 3.662-2.592 1.694-1.213 2.62-1.68 2.975-1.878.496-.277.713-.297.86-.302z"/></svg>
+        تواصل معي عبر تيليجرام
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section class="about section-padding" id="about" aria-label="نبذة عني">
+    <div class="container-narrow fade-section">
+      <h2 class="section-title">نبذة <span>عني</span></h2>
+      <div class="section-divider" role="presentation"></div>
+
+      <div class="about-text" role="article" aria-label="السيرة الذاتية">
+        <p>أنا حمزة أبو سليمة، أبلغ من العمر 30 عاماً، أعمل كمهندس صوت، مونتير، وممثل إذاعي بخبرة تمتد لـ 13 عاماً. فقدت بصري منذ 16 عاماً، وبعد ثلاث سنوات من التحديات والتوقف عن استخدام الحاسوب بسبب الإعاقة، قررت استكمال الطريق وتعلمت استخدام الكمبيوتر عبر برامج قراءة الشاشة. قادني هذا التحدي لاكتشاف شغفي الحقيقي في مجال الصوتيات، لتبدأ رحلتي في التعلم المستمر حتى وصلت إلى مستوى احترافي متقدم.</p>
+        <p>أعتمد في عملي بشكل أساسي على برنامج Reaper، وأمتلك خبرة واسعة في التعامل مع مجموعة ضخمة من الإضافات (Plugins) الاحترافية. أما بالنسبة للمعدات الصوتية، فأستخدم ميكروفون Audio-Technica AT2035، وسماعات رأس Audio-Technica ATH-M40x، بالإضافة إلى كارت صوت Focusrite Scarlett 2i2 4th Gen.</p>
+        <p>أتخصص بشكل أساسي في التمثيل الإذاعي والدراما الصوتية، وليس التعليق الصوتي التقليدي، رغم أنني في صدد تعلمه حالياً. أمتلك مكتبة ضخمة من المؤثرات الصوتية والموسيقى المجانية والخالية تماماً من حقوق الطبع والنشر، كما أنني أقوم بتصميم العديد من المؤثرات والمقاطع الموسيقية بنفسي.</p>
+        <p>على مدار مسيرتي المهنية، أعمل منذ 4 سنوات مع منصة Audiohat للدراما الإذاعية، حيث قمت بتسجيل ما يقرب من 50 دوراً متنوعاً، بالإضافة إلى مونتاج 28 حلقة، منها 3 روايات طويلة: "أسطورة 36" من الأعداد الخاصة من سلسلة ما وراء الطبيعة (والتي قُسمت إلى 12 جزءاً)، و"أسطورة الرقم المشؤوم" من سلسلة ما وراء الطبيعة، ورواية "مكتب محاماة للقتل" للدكتور أغر الجمال. كما قمت بتنفيذ التجميع والهندسة الصوتية لـ 16 حلقة. بالإضافة إلى ذلك، تعاونت مع قناة "تسجيل بوتكاست" و"أستوريا" المملوكتين للأستاذ كريم قنديل، وسجلت معه 4 أدوار إذاعية ولم يكن تعاوناً طويلاً.</p>
+        <p>وعلى صعيد صناعة المحتوى، عملت لأكثر من 4 سنوات على منصة يوتيوب مع صانع محتوى الرعب محمد جويلي، بالإضافة إلى العمل بمفردي لمدة 5 سنوات لإنتاج أكثر من 80 مقطع فيديو. لكن بعد وصول قناتي لمستوى جيد جداً، تعرضت لهجوم أدى لسقوط التفاعل (Reach) تماماً، مما أصابني بالإحباط ودفعني لحذف جميع الفيديوهات. بدأت من جديد بقناة أخرى حققت مشاهدات عالية في 4 أشهر فقط، لكنها للأسف تعرضت لنفس الهجوم من نفس الشخص، ورغم معافرتي ومحاولاتي لإنقاذها، انتهى بها المطاف كسابقتها. بعد هذه التجربة، قررت تغيير الوجهة والمحتوى تماماً ودخول منصة تيك توك لتقديم محتوى عن الأنمي، وهناك حققت نجاحاً كبيراً وأرقاماً قوية في شهر ونصف فقط، إلا أنني قررت تركه في النهاية تجنباً لأي شبهة دينية.</p>
+        <p>حالياً، أكرس كل وقتي وخبرتي للعمل بشكل مستقل كـ Freelancer في مجال الهندسة والتصميم الصوتي بجانب عملي مع منصة audiohat.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Portfolio ===== -->
+  <section class="portfolio section-padding" id="portfolio" aria-label="معرض الأعمال">
+    <div class="container fade-section">
+      <h2 class="section-title">معرض <span>الأعمال</span></h2>
+      <div class="section-divider" role="presentation"></div>
+
+      <div class="tabs" role="tablist" aria-label="تصنيفات الأعمال">
+        <button class="tab-btn active" role="tab" id="tab0" aria-selected="true" aria-controls="panel0" data-tab="0">التمثيل الإذاعي والأدوار</button>
+        <button class="tab-btn" role="tab" id="tab1" aria-selected="false" aria-controls="panel1" data-tab="1">التجميع والهندسة الصوتية</button>
+        <button class="tab-btn" role="tab" id="tab2" aria-selected="false" aria-controls="panel2" data-tab="2">المونتاج الصوتي</button>
+      </div>
+
+      <div class="tab-panel active" id="panel0" role="tabpanel" aria-labelledby="tab0">
+        <div class="video-grid">
+          <div class="video-card" role="group" aria-label="التمثيل الإذاعي - مقطع 1"><button class="video-link" type="button" aria-label="تشغيل مقطع: تمثيل إذاعي 1" data-embed="15B1ncA1Kck" data-title="تمثيل إذاعي 1"><img src="https://img.youtube.com/vi/15B1ncA1Kck/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/15B1ncA1Kck" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="التمثيل الإذاعي - مقطع 2"><button class="video-link" type="button" aria-label="تشغيل مقطع: تمثيل إذاعي 2" data-embed="a0Vf_Zw3of8" data-title="تمثيل إذاعي 2"><img src="https://img.youtube.com/vi/a0Vf_Zw3of8/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/a0Vf_Zw3of8" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="التمثيل الإذاعي - مقطع 3"><button class="video-link" type="button" aria-label="تشغيل مقطع: تمثيل إذاعي 3" data-embed="GgMB0zUm1xc" data-title="تمثيل إذاعي 3"><img src="https://img.youtube.com/vi/GgMB0zUm1xc/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/GgMB0zUm1xc" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="التمثيل الإذاعي - مقطع 4"><button class="video-link" type="button" aria-label="تشغيل مقطع: تمثيل إذاعي 4" data-embed="lxr1HZv0-bc" data-title="تمثيل إذاعي 4"><img src="https://img.youtube.com/vi/lxr1HZv0-bc/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/lxr1HZv0-bc" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="التمثيل الإذاعي - مقطع 5"><button class="video-link" type="button" aria-label="تشغيل مقطع: تمثيل إذاعي 5" data-embed="MAcBLRulYaE" data-title="تمثيل إذاعي 5"><img src="https://img.youtube.com/vi/MAcBLRulYaE/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/MAcBLRulYaE" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="التمثيل الإذاعي - مقطع 6"><button class="video-link" type="button" aria-label="تشغيل مقطع: تمثيل إذاعي 6" data-embed="j5jMaK65lno" data-title="تمثيل إذاعي 6"><img src="https://img.youtube.com/vi/j5jMaK65lno/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/j5jMaK65lno" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="التمثيل الإذاعي - مقطع 7"><button class="video-link" type="button" aria-label="تشغيل مقطع: تمثيل إذاعي 7" data-embed="Z8tOTOcYjZg" data-title="تمثيل إذاعي 7"><img src="https://img.youtube.com/vi/Z8tOTOcYjZg/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/Z8tOTOcYjZg" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="التمثيل الإذاعي - مقطع 8"><button class="video-link" type="button" aria-label="تشغيل مقطع: تمثيل إذاعي 8" data-embed="M1jqDE-t9gc" data-title="تمثيل إذاعي 8"><img src="https://img.youtube.com/vi/M1jqDE-t9gc/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/M1jqDE-t9gc" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel1" role="tabpanel" aria-labelledby="tab1">
+        <div class="video-grid">
+          <div class="video-card" role="group" aria-label="هندسة صوتية - مقطع 1"><button class="video-link" type="button" aria-label="تشغيل مقطع: هندسة صوتية 1" data-embed="fXGIt5EK_-s" data-title="هندسة صوتية 1"><img src="https://img.youtube.com/vi/fXGIt5EK_-s/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/fXGIt5EK_-s" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="هندسة صوتية - مقطع 2"><button class="video-link" type="button" aria-label="تشغيل مقطع: هندسة صوتية 2" data-embed="ibeCqFU5X9U" data-title="هندسة صوتية 2"><img src="https://img.youtube.com/vi/ibeCqFU5X9U/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/ibeCqFU5X9U" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="هندسة صوتية - مقطع 3"><button class="video-link" type="button" aria-label="تشغيل مقطع: هندسة صوتية 3" data-embed="M5GtTD4UALI" data-title="هندسة صوتية 3"><img src="https://img.youtube.com/vi/M5GtTD4UALI/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/M5GtTD4UALI" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="هندسة صوتية - مقطع 4"><button class="video-link" type="button" aria-label="تشغيل مقطع: هندسة صوتية 4" data-embed="HhbwVbEnR3A" data-title="هندسة صوتية 4"><img src="https://img.youtube.com/vi/HhbwVbEnR3A/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/HhbwVbEnR3A" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="هندسة صوتية - مقطع 5"><button class="video-link" type="button" aria-label="تشغيل مقطع: هندسة صوتية 5" data-embed="7ONiVdDbJkU" data-title="هندسة صوتية 5"><img src="https://img.youtube.com/vi/7ONiVdDbJkU/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/7ONiVdDbJkU" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel2" role="tabpanel" aria-labelledby="tab2">
+        <div class="video-grid">
+          <div class="video-card" role="group" aria-label="مونتاج صوتي - مقطع 1"><button class="video-link" type="button" aria-label="تشغيل مقطع: مونتاج صوتي 1" data-embed="0ZE_PCC3GGE" data-title="مونتاج صوتي 1"><img src="https://img.youtube.com/vi/0ZE_PCC3GGE/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/0ZE_PCC3GGE" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="مونتاج صوتي - مقطع 2"><button class="video-link" type="button" aria-label="تشغيل مقطع: مونتاج صوتي 2" data-embed="tMyvEYwdiOg" data-title="مونتاج صوتي 2"><img src="https://img.youtube.com/vi/tMyvEYwdiOg/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/tMyvEYwdiOg" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="مونتاج صوتي - مقطع 3"><button class="video-link" type="button" aria-label="تشغيل مقطع: مونتاج صوتي 3" data-embed="i7sdsdmluZk" data-title="مونتاج صوتي 3"><img src="https://img.youtube.com/vi/i7sdsdmluZk/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/i7sdsdmluZk" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="مونتاج صوتي - مقطع 4"><button class="video-link" type="button" aria-label="تشغيل مقطع: مونتاج صوتي 4" data-embed="qYoWi8_IiIM" data-title="مونتاج صوتي 4"><img src="https://img.youtube.com/vi/qYoWi8_IiIM/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/qYoWi8_IiIM" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="مونتاج صوتي - مقطع 5"><button class="video-link" type="button" aria-label="تشغيل مقطع: مونتاج صوتي 5" data-embed="zuiXSPogVEY" data-title="مونتاج صوتي 5"><img src="https://img.youtube.com/vi/zuiXSPogVEY/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/zuiXSPogVEY" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+          <div class="video-card" role="group" aria-label="مونتاج صوتي - مقطع 6"><button class="video-link" type="button" aria-label="تشغيل مقطع: مونتاج صوتي 6" data-embed="yp0QQtJAerY" data-title="مونتاج صوتي 6"><img src="https://img.youtube.com/vi/yp0QQtJAerY/hqdefault.jpg" alt="" loading="lazy" aria-hidden="true"><div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>تشغيل</span></div></button><a href="https://youtu.be/yp0QQtJAerY" target="_blank" rel="noopener noreferrer" class="video-yt-link" aria-label="شاهد المقطع على يوتيوب في نافذة جديدة"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 4-8 4z"/></svg>شاهد على يوتيوب</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section class="contact section-padding" id="contact" aria-label="التواصل">
+    <div class="container-narrow fade-section">
+      <h2 class="section-title">تواصل <span>معي</span></h2>
+      <div class="section-divider" role="presentation"></div>
+      <p style="text-align:center;color:#888;margin-bottom:40px;font-size:1.05rem;">يمكنك التواصل معي عبر القنوات التالية</p>
+      <div class="contact-grid">
+        <a href="mailto:hamza.aboslema21@gmail.com" class="contact-card" aria-label="البريد الإلكتروني: hamza.aboslema21@gmail.com">
+          <div class="contact-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <h3>البريد الإلكتروني</h3>
+          <p>hamza.aboslema21@gmail.com</p>
+        </a>
+        <a href="https://t.me/Hamza_abo_slema" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="تيليجرام: الرابط يفتح في نافذة جديدة">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.127.037.358.02.557-.14 1.478-.78 5.07-1.102 6.726-.137.702-.406 1.184-.652 1.302-.557.268-1.177-.177-1.823-.35-.448-.12-2.062-.718-2.676-1.21-.306-.246-.65-.652-.024-1.084.188-.13 1.878-1.76 3.043-2.847.383-.358.143-.565-.272-.36-.145.071-2.129 1.454-3.193 2.146-.304.198-.822.245-1.044.155-.44-.18-1.102-.406-1.558-.66-.32-.18-.38-.498-.046-.756.98-.755 2.499-1.761 3.662-2.592 1.694-1.213 2.62-1.68 2.975-1.878.496-.277.713-.297.86-.302z"/></svg>
+          </div>
+          <h3>تيليجرام</h3>
+          <p>@Hamza_abo_slema</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer role="contentinfo">
+    &copy; 2026 حمزة أبو سليمة. جميع الحقوق محفوظة.
+  </footer>
+
+  <script>
+    // ===== Navbar scroll effect =====
+    window.addEventListener('scroll', function() {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // ===== Mobile menu =====
+    var menuBtn = document.getElementById('menuBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', function() {
+      var open = mobileMenu.classList.toggle('open');
+      menuBtn.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open);
+      menuBtn.setAttribute('aria-label', open ? 'إغلاق القائمة' : 'فتح القائمة');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        menuBtn.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.setAttribute('aria-label', 'فتح القائمة');
+      });
+    });
+
+    // ===== Tabs =====
+    var tabButtons = document.querySelectorAll('.tab-btn');
+    var tabPanels = document.querySelectorAll('.tab-panel');
+
+    function activateTab(index) {
+      tabButtons.forEach(function(btn, i) {
+        btn.classList.toggle('active', i === index);
+        btn.setAttribute('aria-selected', i === index);
+        btn.tabIndex = i === index ? 0 : -1;
+      });
+      tabPanels.forEach(function(panel, i) {
+        panel.classList.toggle('active', i === index);
+        panel.hidden = i !== index;
+      });
+    }
+
+    tabButtons.forEach(function(btn, i) {
+      btn.addEventListener('click', function() { activateTab(i); });
+      btn.addEventListener('keydown', function(e) {
+        var len = tabButtons.length;
+        var idx = -1;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { idx = (i + 1) % len; }
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { idx = (i - 1 + len) % len; }
+        else if (e.key === 'Home') { idx = 0; }
+        else if (e.key === 'End') { idx = len - 1; }
+        if (idx >= 0) { e.preventDefault(); activateTab(idx); tabButtons[idx].focus(); }
+      });
+    });
+
+    // ===== Click-to-embed YouTube with Full Accessibility =====
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('[data-embed]');
+      if (!btn) return;
+
+      var id = btn.getAttribute('data-embed');
+      if (!id) return;
+
+      if (btn.querySelector('iframe')) return;
+
+      // Destroy any previously playing video (only one at a time)
+      var prev = document.querySelector('[data-embed] iframe');
+      if (prev) {
+        var p = prev.parentNode;
+        p.innerHTML = '<div class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-overlay" aria-hidden="true"><span>شاهد</span></div>';
+        var t = p.getAttribute('data-title');
+        p.setAttribute('aria-label', t ? 'تشغيل مقطع: ' + t : 'تشغيل مقطع فيديو');
+      }
+
+      var title = btn.getAttribute('data-title') || 'مقطع فيديو يوتيوب';
+
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+      iframe.title = title;
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.allowFullscreen = true;
+      iframe.tabIndex = 0;
+      iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
+
+      // Strip all ARIA / role / tabindex from the <button> so the SR
+      // does not see a "button" role after it becomes a video wrapper
+      btn.innerHTML = '';
+      btn.removeAttribute('role');
+      btn.removeAttribute('aria-label');
+      btn.removeAttribute('tabindex');
+
+      btn.appendChild(iframe);
+
+      // ----- Focus Management via load event -----
+      // Instead of a magic setTimeout, we wait for the real iframe
+      // load event, then transfer focus. This is reliable and stable.
+      iframe.addEventListener('load', function() {
+        iframe.focus();
+      });
+    });
+
+    // No manual Enter/Space listener needed — <button> handles it natively.
+
+    // ===== Intersection Observer for fade-in =====
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-section:not(.visible)').forEach(function(el) { observer.observe(el); });
+    } else {
+      document.querySelectorAll('.fade-section').forEach(function(el) { el.classList.add('visible'); });
+    }
+  </script>
+</body>
+</html>
