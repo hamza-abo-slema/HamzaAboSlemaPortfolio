@@ -601,10 +601,25 @@
       });
     });
 
-    // ===== Set video button overlay text from data-title =====
-    document.querySelectorAll('[data-title]').forEach(function(el) {
-      var span = el.querySelector('.video-overlay span');
-      if (span) span.textContent = 'تشغيل ' + el.getAttribute('data-title');
+    // ===== Fetch real YouTube titles via oEmbed & set overlay text =====
+    document.querySelectorAll('[data-embed]').forEach(function(el) {
+      var id = el.getAttribute('data-embed');
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://www.youtube.com/oembed?url=https://youtu.be/' + id + '&format=json');
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          var data = JSON.parse(xhr.responseText);
+          var realTitle = data.title;
+          el.setAttribute('data-title', realTitle);
+          var span = el.querySelector('.video-overlay span');
+          if (span) span.textContent = 'تشغيل ' + realTitle;
+          el.setAttribute('aria-label', 'تشغيل مقطع: ' + realTitle);
+          // Also update the Youtube link's aria-label if needed
+          var ytLink = el.parentNode.querySelector('.video-yt-link');
+          if (ytLink) ytLink.setAttribute('aria-label', 'شاهد "' + realTitle + '" على يوتيوب في نافذة جديدة');
+        }
+      };
+      xhr.send();
     });
 
     // ===== Click-to-embed YouTube with Full Accessibility =====
