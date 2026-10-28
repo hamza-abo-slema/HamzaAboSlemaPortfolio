@@ -83,6 +83,29 @@
       outline: none;
       box-shadow: 0 0 0 3px rgba(0,188,212,0.6), 0 0 30px rgba(0,188,212,0.3);
     }
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 36px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px rgba(37,211,102,0.3);
+    }
+    .btn-whatsapp:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 50px rgba(37,211,102,0.5);
+    }
+    .btn-whatsapp:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37,211,102,0.6), 0 0 30px rgba(37,211,102,0.3);
+    }
     @media (prefers-reduced-motion: no-preference) {
       .fade-section { opacity: 0; transform: translateY(40px); transition: all 0.7s ease-out; }
     }
@@ -393,6 +416,7 @@
     @media (max-width: 480px) {
       .hero-name { font-size: 1.8rem; }
       .btn-accent { padding: 14px 24px; font-size: 1rem; }
+      .btn-whatsapp { padding: 14px 24px; font-size: 1rem; }
       .video-grid { grid-template-columns: 1fr; }
       .stat-card { padding: 16px 12px; }
       .stat-number { font-size: 1.5rem; }
@@ -433,9 +457,9 @@
       <p class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
       <h1 class="hero-name"><span class="gradient-text">حمزة</span> أبو سليمة</h1>
       <p class="hero-sub">مهندس صوت محترف | خبرة 13 عاماً في التمثيل الإذاعي، المونتاج، والهندسة الصوتية</p>
-      <button type="button" class="btn-accent" id="telegramBtn" aria-label="تواصل معي عبر تيليجرام">
-        <i class="fa-brands fa-telegram" aria-hidden="true"></i>
-        تواصل معي عبر تيليجرام
+      <button type="button" class="btn-whatsapp" id="whatsappBtn" aria-label="تواصل معي عبر واتساب">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        تواصل معي فقط
       </button>
     </div>
   </section>
@@ -571,9 +595,9 @@
       });
     });
 
-    // ===== Telegram button opens link in new window =====
-    document.getElementById('telegramBtn').addEventListener('click', function() {
-      window.open('https://t.me/Hamza_abo_slema', '_blank', 'noopener,noreferrer');
+    // ===== WhatsApp button opens link in new window =====
+    document.getElementById('whatsappBtn').addEventListener('click', function() {
+      window.open('https://wa.me/HamzaAboSlema', '_blank', 'noopener,noreferrer');
     });
 
     // ===== Tabs =====
